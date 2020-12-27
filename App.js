@@ -1,21 +1,30 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, {useRef } from 'react';
+import { StyleSheet, View, Dimensions } from 'react-native';
+import useDeviceSize from './useDeviceSize';
 
 export default function App() {
+
+  
+  const ref = useRef();
+  const hookValue = useDeviceSize(ref.current);
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View style={styles.container} ref={ref} >
+      <h1>{"Hook value returned : "}</h1>
+      <h2>
+        {"Device Size: "+ hookValue.size + "\n" }
+        {"Device Oreintation: " + hookValue.Oreintation}
+      </h2> 
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
+    flex:1,
+    alignItems: 'stretch',
     justifyContent: 'center',
+    padding: 20,
+    backgroundColor: 'powderblue',
   },
 });
